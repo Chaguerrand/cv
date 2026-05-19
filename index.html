@@ -152,6 +152,53 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 .chat-send:hover { background: #243F5C; }
 
 
+/* ── RESPONSIVE TABLET ── */
+@media (max-width: 1024px) {
+  .header { padding: 20px 32px; grid-template-columns: 220px 1fr 220px; }
+  .tiles { padding: 24px 32px 0; gap: 14px; grid-template-columns: repeat(3, 1fr); }
+  .panel { padding: 36px 32px 56px; }
+  .skills-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── RESPONSIVE MOBILE ── */
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+    text-align: center;
+    gap: 14px;
+  }
+  .header-center { order: -1; }
+  .header-left { order: 0; text-align: center; line-height: 2.1; }
+  .header-left a { display: inline-block; }
+  .header-tags { order: 1; justify-content: center; }
+
+  .tiles { grid-template-columns: repeat(2, 1fr); padding: 20px 16px 0; gap: 12px; }
+  .tile { padding: 22px 18px; }
+
+  .panel { padding: 28px 16px 48px; }
+  .panel-title { font-size: 1.6rem; margin-bottom: 22px; }
+
+  .exp-grid { grid-template-columns: 1fr; }
+  .span2 { grid-column: span 1; }
+  .card { padding: 22px 20px; }
+
+  .skills-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+  .edu-grid { gap: 16px; }
+
+  .wagon-inner { grid-template-columns: 1fr; }
+
+  .fab { display: none !important; }
+  .chat-popup { display: none !important; }
+}
+
+@media (max-width: 480px) {
+  .tiles { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .header-name { font-size: 2.2rem; }
+}
+
   .htip, .ctip { cursor: default; }
   #skill-tooltip {
     position: fixed;
@@ -589,6 +636,20 @@ document.querySelectorAll('.htip, .ctip').forEach(el => {
   });
   el.addEventListener('mousemove', posSkillTip);
   el.addEventListener('mouseleave', () => { skillTip.style.opacity = '0'; });
+
+  el.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    skillTip.textContent = el.dataset.tip;
+    const rect = el.getBoundingClientRect();
+    let x = rect.left;
+    let y = rect.bottom + 8;
+    if (x + 228 > window.innerWidth) x = Math.max(4, window.innerWidth - 232);
+    if (y + 80 > window.innerHeight) y = rect.top - 80;
+    skillTip.style.left = x + 'px';
+    skillTip.style.top = y + 'px';
+    skillTip.style.opacity = '1';
+    setTimeout(() => { skillTip.style.opacity = '0'; }, 2500);
+  }, { passive: false });
 });
 
 function posSkillTip(e) {
