@@ -173,7 +173,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   .header-left a { display: inline-block; }
   .header-tags { order: 1; justify-content: center; }
 
-  .tiles { grid-template-columns: repeat(2, 1fr); padding: 20px 16px 0; gap: 12px; }
+  .tiles { grid-template-columns: 1fr; padding: 20px 16px 0; gap: 12px; }
   .tile { padding: 22px 18px; }
 
   .panel { padding: 28px 16px 48px; }
@@ -533,29 +533,67 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 <script>
 // ── ACCORDION ──
 let current = null;
+
+// Mémorise le noeud précédant chaque panel pour restauration
+const panelPrev = {};
+['profil', 'experiences', 'formation', 'competences', 'ailleurs'].forEach(id => {
+  panelPrev[id] = document.getElementById('panel-' + id).previousElementSibling;
+});
+
+function isMobile() { return window.innerWidth <= 768; }
+
+function restorePanel(section) {
+  const panel = document.getElementById('panel-' + section);
+  panelPrev[section].after(panel);
+  panel.style.gridColumn = '';
+  panel.style.maxWidth = '';
+  panel.style.padding = '';
+  panel.style.margin = '';
+}
+
 function toggle(section) {
-  const panels = document.querySelectorAll('.panel');
-  const tiles = document.querySelectorAll('.tile');
+  const mobile = isMobile();
+
   if (current === section) {
-    // Ferme
-    document.getElementById('panel-' + section).classList.remove('visible');
-    document.querySelector('[data-section="' + section + '"]').classList.remove('active');
-    document.getElementById('arrow-' + section).textContent = '▼';
+    document.getElementById('panel-' + current).classList.remove('visible');
+    document.querySelector('[data-section="' + current + '"]').classList.remove('active');
+    document.getElementById('arrow-' + current).textContent = '▼';
+    if (mobile) restorePanel(current);
     current = null;
-  } else {
-    // Ferme l'ancien
-    if (current) {
-      document.getElementById('panel-' + current).classList.remove('visible');
-      document.querySelector('[data-section="' + current + '"]').classList.remove('active');
-      document.getElementById('arrow-' + current).textContent = '▼';
-    }
-    // Ouvre le nouveau
-    document.getElementById('panel-' + section).classList.add('visible');
-    document.querySelector('[data-section="' + section + '"]').classList.add('active');
-    document.getElementById('arrow-' + section).textContent = '▲';
-    current = section;
+    return;
+  }
+
+  if (current) {
+    document.getElementById('panel-' + current).classList.remove('visible');
+    document.querySelector('[data-section="' + current + '"]').classList.remove('active');
+    document.getElementById('arrow-' + current).textContent = '▼';
+    if (mobile) restorePanel(current);
+  }
+
+  const panel = document.getElementById('panel-' + section);
+  const tile = document.querySelector('[data-section="' + section + '"]');
+  tile.classList.add('active');
+  document.getElementById('arrow-' + section).textContent = '▲';
+
+  if (mobile) {
+    tile.after(panel);
+    panel.style.gridColumn = '1 / -1';
+    panel.style.maxWidth = 'none';
+    panel.style.padding = '20px 16px 32px';
+    panel.style.margin = '0';
+  }
+
+  panel.classList.add('visible');
+  current = section;
+
+  if (mobile) {
+    setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 }
+
+window.addEventListener('resize', () => {
+  if (current && !isMobile()) restorePanel(current);
+});
 
 // ── VIDEO ──
 let videoOpen = false;
