@@ -53,6 +53,7 @@ def index():
     html = open(html_path, encoding="utf-8").read()
     return html
 
+@app.route("/chat", methods=["POST"])
 def chat():
     api_key = os.environ.get("GEMINI_API_KEY", "")
     if not api_key:

@@ -30,7 +30,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 /* ── TILES ── */
 .tiles {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   padding: 36px 52px 0;
   max-width: 1600px;
@@ -178,7 +178,8 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   <div class="header-left">
     📍 Orgeval - Yvelines (78)<br>
     📍 Port-Louis - Morbihan (56)<br>
-    <a href="https://linkedin.com/in/cejego" target="_blank">🔗 linkedin.com/in/cejego</a>
+    <a href="https://linkedin.com/in/cejego" target="_blank">🔗 linkedin.com/in/cejego</a><br>
+    🇬🇧 Anglais bilingue
   </div>
   <div class="header-center">
     <div class="header-name">Charles-Enguerrand Jégo</div>
@@ -219,6 +220,12 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
     <div class="tile-title">Stack & Secteurs</div>
     <div class="tile-sub">Tech & métier</div>
     <div class="tile-arrow" id="arrow-competences">▼</div>
+  </div>
+  <div class="tile" data-section="ailleurs" onclick="toggle('ailleurs')">
+    <div class="tile-num">05</div>
+    <div class="tile-title">Side Quests</div>
+    <div class="tile-sub">Au-delà du CV</div>
+    <div class="tile-arrow" id="arrow-ailleurs">▼</div>
   </div>
 </div>
 
@@ -414,6 +421,33 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   </div>
 </div>
 
+<!-- PANEL AILLEURS -->
+<div class="panel" id="panel-ailleurs">
+  <div class="panel-title">Ailleurs</div>
+  <div class="exp-grid">
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Écriture</div>
+      </div>
+      <ul class="card-bullets">
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+        <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+        <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Loisirs</div>
+      </div>
+      <ul class="card-bullets">
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</li>
+        <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</li>
+        <li>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <!-- CHAT FAB -->
 <button class="fab" onclick="toggleChat()" id="fab-btn">💬 Discuter avec mon CV</button>
 
@@ -523,27 +557,6 @@ function appendMsg(text, cls) {
 <div id="skill-tooltip"></div>
 
 </div>
-
-<script>
-};
-
-function mapUrl(lat, lng) {
-  return `/map?lat=${lat}&lng=${lng}`;
-}
-
-  el.addEventListener('mousemove', posMapTooltip);
-  el.addEventListener('mouseleave', () => { mapTooltip.style.display = 'none'; });
-});
-
-function posMapTooltip(e) {
-  let x = e.clientX + 16;
-  let y = e.clientY + 16;
-  if (x + 220 > window.innerWidth) x = e.clientX - 236;
-  if (y + 196 > window.innerHeight) y = e.clientY - 212;
-  mapTooltip.style.left = x + 'px';
-  mapTooltip.style.top = y + 'px';
-}
-</script>
 
 
 <script>
