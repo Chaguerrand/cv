@@ -35,7 +35,8 @@ COMPÉTENCES
 - Data & BI : Power BI, SQL Server, Excel (certifié), VBA
 - CRM & Marketing : Salesforce, Pardot, Segmentation, Ciblage, Microsoft Office
 - Secteurs : Assurance IARD, Assurance vie, Courtage, Marketing direct, Data gouvernance, RGPD
-- Savoir-faire : Pilotage de projets, Sens du client, Proactivité, Esprit d'initiative, Challenger le statu quo
+- Savoir-faire : Pilotage de projets, Management d'équipes, Pédagogie, Esprit de synthèse, Esprit d'initiative, Sens du client
+- Savoir-être : Curiosité intellectuelle, Rigueur, Adaptabilité, Sens du détail, Challenger le statu quo
 - Langues : Anglais bilingue
 """
 
@@ -48,7 +49,6 @@ CV : {CV_DATA}"""
 
 @app.route("/")
 def index():
-    import os
     html_path = os.path.join(os.path.dirname(__file__), "index.html")
     html = open(html_path, encoding="utf-8").read()
     return html
@@ -60,6 +60,8 @@ def chat():
         return jsonify({"error": "Clé GEMINI_API_KEY manquante dans .env"}), 400
     data = request.json
     messages = data.get("messages", [])
+    if not messages:
+        return jsonify({"error": "aucun message"}), 400
     try:
         client = genai.Client(api_key=api_key)
         history = [
