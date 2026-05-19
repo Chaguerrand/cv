@@ -22,7 +22,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 .header-left a { color: #6B9ABF; text-decoration: none; }
 .header-left a:hover { color: #B8CDD9; }
 .header-center { text-align: center; }
-.header-name { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: #F4F1EC; line-height: 1.1; }
+.header-name { font-family: 'Playfair Display', serif; font-size: 3rem; color: #F4F1EC; line-height: 1.1; }
 .header-sub { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #E8895A; margin-top: 6px; }
 .header-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
 .tag { background: rgba(255,255,255,0.08); color: #B8CDD9; padding: 4px 11px; border-radius: 20px; font-size: 0.72rem; border: 1px solid rgba(255,255,255,0.12); }
@@ -70,6 +70,9 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
 /* PROFIL */
 .profil-text { font-size: 1.1rem; line-height: 1.9; color: #344050; font-weight: 300; max-width: 820px; }
+.card-prose { font-size: 0.95rem; line-height: 1.85; color: #3A4A5A; }
+.card-prose em { font-style: italic; color: #5A7A96; }
+.card-prose strong { font-weight: 600; color: #1C3148; }
 
 /* EXPÉRIENCES */
 .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -82,6 +85,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 .card-bullets { list-style: none; }
 .card-bullets li { font-size: 0.95rem; color: #3A4A5A; line-height: 1.7; padding: 4px 0 4px 18px; position: relative; }
 .card-bullets li::before { content: '-'; position: absolute; left: 0; color: #8BA5BE; }
+.card-bullets li strong { font-weight: 600; color: #1C3148; }
 .span2 { grid-column: span 2; }
 .note-line { display: block; font-size: 0.9rem; color: #8BA5BE; font-style: italic; line-height: 2.2; }
 
@@ -179,7 +183,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
     📍 Orgeval - Yvelines (78)<br>
     📍 Port-Louis - Morbihan (56)<br>
     <a href="https://linkedin.com/in/cejego" target="_blank">🔗 linkedin.com/in/cejego</a><br>
-    🏴󠁧󠁢󠁥󠁮󠁧󠁿 Anglais bilingue
+    🇬🇧 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇺🇸 Anglais bilingue
   </div>
   <div class="header-center">
     <div class="header-name">Charles-Enguerrand Jégo</div>
@@ -232,14 +236,16 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 <!-- PANEL PROFIL -->
 <div class="panel" id="panel-profil">
   <div class="panel-title">À propos</div>
-  <div class="profil-text">
-    10 ans d'expérience métier dans l'assurance et le marketing, reconverti en data scientist.<br><br>
-    Maîtrise complète de la chaîne data : Python, SQL, ML, NLP, LLMs via LangChain, GCP - avec des projets concrets :
-    classification de texte avec BERT, pipelines de bout en bout, déploiement sur GCP.<br><br>
-    Je cherche une équipe où ces compétences ont un impact direct sur le produit, le business et les équipes métier,
-    et où la curiosité technique est une valeur, pas un bonus. Une équipe dans laquelle la collaboration et les échanges
-    sont de mise, et où les idées sont valorisées plutôt que de se satisfaire du
-    <em>"Bah, puisqu'on a tout le temps fait comme ça..."</em>
+  <div class="card">
+    <div class="card-prose">
+      10 ans d'expérience métier dans l'assurance et le marketing, reconverti en data scientist.<br><br>
+      Maîtrise complète de la chaîne data : Python, SQL, ML, NLP, LLMs via LangChain, GCP - avec des projets concrets :
+      classification de texte avec BERT, pipelines de bout en bout, déploiement sur GCP.<br><br>
+      Je cherche une équipe où ces compétences ont un impact direct sur le produit, le business et les équipes métier,
+      et où la curiosité technique est une valeur, pas un bonus. Une équipe dans laquelle la collaboration et les échanges
+      sont de mise, et où les idées sont valorisées plutôt que de se satisfaire du
+      <em>"Bah, puisqu'on a tout le temps fait comme ça..."</em>
+    </div>
   </div>
 </div>
 
@@ -430,7 +436,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
       <div class="card-top">
         <div class="card-title">Écriture</div>
       </div>
-      <div class="profil-text" style="font-size: 0.92rem; line-height: 1.85;">
+      <div class="card-prose">
         Je travaille depuis quelques temps sur l'écriture de mon premier roman : <em>Celui qui avait les clés</em>.<br><br>
         L'histoire d'un réfugié, un homme de ménage sans papiers au Vatican depuis quarante ans, élu pape par un concours de circonstances improbable. Il prend le nom de Jean-Paul III et décide de nettoyer l'Église de l'intérieur.<br><br>
         L'écriture est aussi pour moi un espace plus intime, loin des projets et des ambitions. Des chansons pour ma fille, parce que certaines choses se disent mieux en musique qu'en mots ordinaires, et que des chansons permettent parfois de s'endormir plus sereinement. Des poèmes écrits à la main, souvent dans des moments difficiles, qui ne sont pas faits pour être lus mais pour ne pas rester enfermés. Des textes courts, des fragments, des débuts de quelque chose qui n'aboutissent pas toujours, et c'est très bien comme ça.<br><br>
