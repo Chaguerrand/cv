@@ -268,9 +268,57 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   word-break: break-word;
 }
 
+/* === Easter egg: Snorlax === */
+#snorlax-wrap {
+  position: fixed;
+  bottom: -200px;
+  right: 28px;
+  z-index: 9998;
+  cursor: pointer;
+  transition: bottom 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  user-select: none;
+  text-align: center;
+}
+#snorlax-wrap.napping { bottom: 12px; }
+.snorlax-z {
+  position: absolute;
+  color: #7FA3BF;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  opacity: 0;
+  animation: floatZ 2s ease-in-out infinite;
+  pointer-events: none;
+}
+.snorlax-z:nth-child(1) { font-size: 11px; right: 14px; top: -4px;  animation-delay: 0s; }
+.snorlax-z:nth-child(2) { font-size: 16px; right: 26px; top: -24px; animation-delay: 0.7s; }
+.snorlax-z:nth-child(3) { font-size: 22px; right: 40px; top: -50px; animation-delay: 1.4s; }
+@keyframes floatZ {
+  0%   { opacity: 0; transform: translateY(0) rotate(-10deg); }
+  35%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-32px) rotate(14deg); }
+}
+.snorlax-drool { animation: drip 1.9s ease-in-out infinite; transform-origin: 52px 62px; }
+@keyframes drip {
+  0%, 100% { transform: scaleY(1); }
+  55%       { transform: scaleY(1.6); }
+}
+#snorlax-label { font-size: 10px; color: #7FA3BF; margin-top: 3px; font-style: italic; opacity: 0.7; }
+
 </style>
 </head>
 <body>
+
+<!--
+  Tiens, tu as trouvé le source. Respect.
+  Bien que... le bouton "afficher la source" aurait suffi non ?
+  Le site est quand meme bien plus lisible de l'autre cote.
+
+  (Found the source? Bold move.
+  Though I'd argue Ctrl+U is the nerd's ↑ button.
+  The actual site is much easier on the eyes.)
+
+  charles.jego@gmail.com | linkedin.com/in/cejego
+-->
 
 <!-- LOADER -->
 <div id="loader">
@@ -886,6 +934,67 @@ function setLang(lang) {
   const saved = localStorage.getItem('cv-lang');
   if (saved === 'en') setLang('en');
 })();
+
+// === Easter egg 1: Console message ===
+(function() {
+  const fr = currentLang !== 'en';
+  console.log(
+    '%c' + (fr ? "Bah qu'est ce que tu fais la ?" : "Oh, inspecting the source code?"),
+    'color:#E8895A;font-size:15px;font-weight:700;font-family:Georgia,serif;line-height:2;'
+  );
+  console.log(
+    '%c' + (fr
+      ? "c'est quand meme vachement moins facile a lire ici non ?"
+      : "Respect. Though I'd argue the actual site is a lot easier to read."),
+    'color:#7FA3BF;font-size:11px;'
+  );
+})();
+
+// === Easter egg 3: Konami code -> tile shuffle ===
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiIdx = 0;
+document.addEventListener('keydown', function(e) {
+  konamiIdx = (e.key === KONAMI[konamiIdx]) ? konamiIdx + 1 : (e.key === KONAMI[0] ? 1 : 0);
+  if (konamiIdx === KONAMI.length) { konamiIdx = 0; shuffleTiles(); }
+});
+
+function shuffleTiles() {
+  const tiles = [...document.querySelectorAll('.tile')];
+  const rects = tiles.map(function(t) { return t.getBoundingClientRect(); });
+  const indices = tiles.map(function(_, i) { return i; });
+  for (var i = indices.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
+  }
+  tiles.forEach(function(t) { t.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)'; t.style.zIndex = '10'; });
+  tiles.forEach(function(t, i) {
+    var dx = rects[indices[i]].left - rects[i].left;
+    var dy = rects[indices[i]].top  - rects[i].top;
+    t.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+  });
+  setTimeout(function() {
+    tiles.forEach(function(t) { t.style.transform = ''; });
+    setTimeout(function() { tiles.forEach(function(t) { t.style.transition = ''; t.style.zIndex = ''; }); }, 520);
+  }, 1300);
+}
+
+// === Easter egg 4: Snorlax after 2 min inactivity ===
+var snorlaxTimer;
+function resetInactivity() {
+  clearTimeout(snorlaxTimer);
+  document.getElementById('snorlax-wrap').classList.remove('napping');
+  snorlaxTimer = setTimeout(function() {
+    document.getElementById('snorlax-wrap').classList.add('napping');
+  }, 120000);
+}
+function wakeUpSnorlax() {
+  document.getElementById('snorlax-wrap').classList.remove('napping');
+  resetInactivity();
+}
+['mousemove','keydown','click','touchstart','scroll'].forEach(function(ev) {
+  document.addEventListener(ev, resetInactivity, { passive: true });
+});
+resetInactivity();
 </script>
 
 <div id="skill-tooltip"></div>
@@ -939,6 +1048,51 @@ function posSkillTip(e) {
   skillTip.style.top = y + 'px';
 }
 </script>
+
+<!-- Easter egg: Snorlax apres 2 min d'inactivite -->
+<div id="snorlax-wrap" onclick="wakeUpSnorlax()" title="Cliquer pour reveiller">
+  <span class="snorlax-z">z</span>
+  <span class="snorlax-z">z</span>
+  <span class="snorlax-z">z</span>
+  <svg viewBox="0 0 100 115" width="88" height="101" xmlns="http://www.w3.org/2000/svg">
+    <!-- Body -->
+    <ellipse cx="50" cy="88" rx="44" ry="30" fill="#7B8FAC"/>
+    <!-- Belly patch -->
+    <ellipse cx="50" cy="93" rx="26" ry="21" fill="#E8D5B0"/>
+    <!-- Head -->
+    <ellipse cx="50" cy="48" rx="27" ry="25" fill="#7B8FAC"/>
+    <!-- Left ear -->
+    <ellipse cx="25" cy="31" rx="7" ry="9" fill="#6A7E9A"/>
+    <ellipse cx="25" cy="31" rx="4" ry="6" fill="#C8A0A0" opacity="0.6"/>
+    <!-- Right ear -->
+    <ellipse cx="75" cy="31" rx="7" ry="9" fill="#6A7E9A"/>
+    <ellipse cx="75" cy="31" rx="4" ry="6" fill="#C8A0A0" opacity="0.6"/>
+    <!-- Closed eyes -->
+    <path d="M35,46 Q39,42 43,46" stroke="#2A3A4A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M57,46 Q61,42 65,46" stroke="#2A3A4A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Blush -->
+    <ellipse cx="35" cy="53" rx="6" ry="3.5" fill="#D4A0A0" opacity="0.45"/>
+    <ellipse cx="65" cy="53" rx="6" ry="3.5" fill="#D4A0A0" opacity="0.45"/>
+    <!-- Nose -->
+    <circle cx="46" cy="55" r="2" fill="#5A6A8A"/>
+    <circle cx="54" cy="55" r="2" fill="#5A6A8A"/>
+    <!-- Mouth -->
+    <path d="M44,61 Q50,66 56,61" stroke="#2A3A4A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Drool -->
+    <g class="snorlax-drool">
+      <path d="M52,64 Q55,72 53,79" stroke="#B8D4E8" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="52" cy="81" rx="4" ry="3" fill="#B8D4E8"/>
+    </g>
+    <!-- Arms -->
+    <ellipse cx="11" cy="84" rx="12" ry="6" fill="#7B8FAC" transform="rotate(-18,11,84)"/>
+    <ellipse cx="89" cy="84" rx="12" ry="6" fill="#7B8FAC" transform="rotate(18,89,84)"/>
+    <!-- Feet -->
+    <ellipse cx="32" cy="115" rx="10" ry="5" fill="#6A7E9A"/>
+    <ellipse cx="50" cy="117" rx="10" ry="5" fill="#6A7E9A"/>
+    <ellipse cx="68" cy="115" rx="10" ry="5" fill="#6A7E9A"/>
+  </svg>
+  <div id="snorlax-label" data-fr="cliquer pour reveiller" data-en="click to wake up">cliquer pour reveiller</div>
+</div>
 
 </body>
 </html>
