@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 CV_DATA = """
 CHARLES-ENGUERRAND JÉGO - Data Scientist - ML Engineer
-Orgeval, Yvelines (78) / Port-Louis, Morbihan (56) | Anglais bilingue | linkedin.com/in/cejego
+Orgeval, Yvelines (78) | Anglais bilingue | linkedin.com/in/cejego
 
 PROFIL
 10 ans d'expérience métier dans l'assurance et le marketing, reconverti en data scientist.
