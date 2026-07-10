@@ -24,8 +24,31 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 .header-center { text-align: center; }
 .header-name { font-family: 'Playfair Display', serif; font-size: 3rem; color: #F4F1EC; line-height: 1.1; }
 .header-sub { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #E8895A; margin-top: 6px; }
+.header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 .header-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
 .tag { background: rgba(255,255,255,0.08); color: #B8CDD9; padding: 4px 11px; border-radius: 20px; font-size: 0.72rem; border: 1px solid rgba(255,255,255,0.12); }
+
+/* ── LANG SWITCHER ── */
+.lang-switcher {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  color: #7FA3BF;
+  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.lang-btn.active { background: rgba(255,255,255,0.15); color: #F4F1EC; }
 
 /* ── TILES ── */
 .tiles {
@@ -136,41 +159,6 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 @keyframes spin { to { transform: rotate(360deg); } }
 .loader-msg { font-size: 0.75rem; color: #5A7A96; text-align: center; min-height: 1.2em; transition: opacity 0.4s; }
 
-/* ── CHAT FAB ── */
-.fab {
-  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
-  background: linear-gradient(135deg, #1C3148, #2A5080);
-  color: white; border: none; border-radius: 50px;
-  padding: 14px 22px; font-size: 0.88rem; font-weight: 600;
-  cursor: pointer; box-shadow: 0 6px 24px rgba(0,0,0,0.3);
-  font-family: 'Inter', sans-serif; letter-spacing: 0.02em;
-  transition: all 0.2s; white-space: nowrap;
-}
-.fab:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
-
-.chat-popup {
-  position: fixed; bottom: 84px; right: 28px; width: 400px;
-  background: white; border-radius: 20px;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.22);
-  z-index: 9998; display: none; flex-direction: column;
-  max-height: 560px; overflow: hidden;
-}
-.chat-popup.open { display: flex; }
-.chat-hdr { background: linear-gradient(135deg, #1C3148, #2A4A6A); padding: 20px 24px; flex-shrink: 0; }
-.chat-hdr-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: white; margin-bottom: 3px; }
-.chat-hdr-sub { font-size: 0.76rem; color: #8BA5BE; }
-.chat-msgs { flex: 1; overflow-y: auto; padding: 16px; background: #F8F6F2; display: flex; flex-direction: column; gap: 10px; }
-.msg { padding: 10px 14px; font-size: 0.88rem; line-height: 1.55; max-width: 85%; word-break: break-word; }
-.msg.user { align-self: flex-end; background: #1C3148; color: white; border-radius: 14px 14px 4px 14px; }
-.msg.bot { align-self: flex-start; background: white; color: #2A3A4A; border-radius: 14px 14px 14px 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-.msg.typing { color: #8BA5BE; font-style: italic; }
-.chat-input-row { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #EEE; background: white; flex-shrink: 0; }
-.chat-input { flex: 1; border: 1px solid #DDD; border-radius: 8px; padding: 9px 13px; font-size: 0.88rem; font-family: 'Inter', sans-serif; outline: none; transition: border 0.15s; }
-.chat-input:focus { border-color: #4A8AB5; }
-.chat-send { background: #1C3148; color: white; border: none; border-radius: 8px; padding: 9px 16px; font-size: 0.9rem; cursor: pointer; transition: background 0.15s; }
-.chat-send:hover { background: #243F5C; }
-
-
 /* ── RESPONSIVE TABLET ── */
 @media (max-width: 1024px) {
   .header { padding: 20px 32px; grid-template-columns: 220px 1fr 220px; }
@@ -190,7 +178,8 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   .header-center { order: -1; }
   .header-left { order: 0; text-align: center; line-height: 2.1; }
   .header-left a { display: inline-block; }
-  .header-tags { order: 1; justify-content: center; }
+  .header-right { order: 1; align-items: center; }
+  .header-tags { justify-content: center; }
 
   .tiles { grid-template-columns: 1fr; padding: 20px 16px 0; gap: 12px; }
   .tile { padding: 22px 18px; }
@@ -207,9 +196,6 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   .edu-grid { gap: 16px; }
 
   .wagon-inner { grid-template-columns: 1fr; }
-
-  .fab { display: none !important; }
-  .chat-popup { display: none !important; }
 }
 
 @media (max-width: 480px) {
@@ -234,26 +220,26 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 .contact-bar a:hover { color: #4A6A8A; }
 .contact-bar-sep { color: #C8C4BE; }
 
-  .htip, .ctip { cursor: default; }
-  #skill-tooltip {
-    position: fixed;
-    background: #0F1E2D;
-    color: #F4F1EC;
-    font-size: 12px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    padding: 8px 13px;
-    border-radius: 8px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-    z-index: 99999;
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-    max-width: 220px;
-    line-height: 1.5;
-    word-break: break-word;
-  }
+.htip, .ctip { cursor: default; }
+#skill-tooltip {
+  position: fixed;
+  background: #0F1E2D;
+  color: #F4F1EC;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  padding: 8px 13px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 99999;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  max-width: 220px;
+  line-height: 1.5;
+  word-break: break-word;
+}
 
 </style>
 </head>
@@ -269,7 +255,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
 <!-- HEADER -->
 <div class="header">
-  <div class="header-left">
+  <div class="header-left" data-i18n="header-left">
     📍 Orgeval - Yvelines (78)<br>
     <a href="https://linkedin.com/in/cejego" target="_blank">🔗 linkedin.com/in/cejego</a><br>
     <span style="padding-left:1.6em">Anglais bilingue</span>
@@ -278,13 +264,37 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
     <div class="header-name">Charles-Enguerrand Jégo</div>
     <div class="header-sub">Data Scientist - ML Engineer</div>
   </div>
-  <div class="header-tags">
-    <span class="tag htip" data-tip="Langage principal : data wrangling, ML, scripting">Python</span>
-    <span class="tag htip" data-tip="Scikit-learn, TensorFlow, HuggingFace - modélisation et entraînement">Machine Learning</span>
-    <span class="tag htip" data-tip="Traitement du langage naturel - BERT, transformers, classification de texte">NLP</span>
-    <span class="tag htip" data-tip="Intégration et orchestration de LLMs via LangChain">LLMs - LangChain</span>
-    <span class="tag htip" data-tip="Déploiement de pipelines et d'APIs sur Google Cloud Platform">GCP</span>
-    <span class="tag htip" data-tip="Requêtes avancées, window functions, CTEs - PostgreSQL & BigQuery">SQL</span>
+  <div class="header-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">Français</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+    </div>
+    <div class="header-tags">
+      <span class="tag htip"
+        data-tip="Langage principal : data wrangling, ML, scripting"
+        data-tip-fr="Langage principal : data wrangling, ML, scripting"
+        data-tip-en="Main language: data wrangling, ML, scripting">Python</span>
+      <span class="tag htip"
+        data-tip="Scikit-learn, TensorFlow, HuggingFace - modélisation et entraînement"
+        data-tip-fr="Scikit-learn, TensorFlow, HuggingFace - modélisation et entraînement"
+        data-tip-en="Scikit-learn, TensorFlow, HuggingFace - modelling and training">Machine Learning</span>
+      <span class="tag htip"
+        data-tip="Traitement du langage naturel - BERT, transformers, classification de texte"
+        data-tip-fr="Traitement du langage naturel - BERT, transformers, classification de texte"
+        data-tip-en="Natural language processing - BERT, transformers, text classification">NLP</span>
+      <span class="tag htip"
+        data-tip="Intégration et orchestration de LLMs via LangChain"
+        data-tip-fr="Intégration et orchestration de LLMs via LangChain"
+        data-tip-en="LLM integration and orchestration via LangChain">LLMs - LangChain</span>
+      <span class="tag htip"
+        data-tip="Déploiement de pipelines et d'APIs sur Google Cloud Platform"
+        data-tip-fr="Déploiement de pipelines et d'APIs sur Google Cloud Platform"
+        data-tip-en="Pipeline and API deployment on Google Cloud Platform">GCP</span>
+      <span class="tag htip"
+        data-tip="Requêtes avancées, window functions, CTEs - PostgreSQL & BigQuery"
+        data-tip-fr="Requêtes avancées, window functions, CTEs - PostgreSQL & BigQuery"
+        data-tip-en="Advanced queries, window functions, CTEs - PostgreSQL & BigQuery">SQL</span>
+    </div>
   </div>
 </div>
 
@@ -292,41 +302,41 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 <div class="tiles">
   <div class="tile" data-section="profil" onclick="toggle('profil')">
     <div class="tile-num">01</div>
-    <div class="tile-title">À propos</div>
-    <div class="tile-sub">Qui suis-je ?</div>
+    <div class="tile-title" data-fr="À propos" data-en="About me">À propos</div>
+    <div class="tile-sub" data-fr="Qui suis-je ?" data-en="Who am I?">Qui suis-je ?</div>
     <div class="tile-arrow" id="arrow-profil">▼</div>
   </div>
   <div class="tile" data-section="experiences" onclick="toggle('experiences')">
     <div class="tile-num">02</div>
-    <div class="tile-title">Expériences</div>
-    <div class="tile-sub">10 ans de parcours</div>
+    <div class="tile-title" data-fr="Expériences" data-en="Experience">Expériences</div>
+    <div class="tile-sub" data-fr="10 ans de parcours" data-en="A decade of growth">10 ans de parcours</div>
     <div class="tile-arrow" id="arrow-experiences">▼</div>
   </div>
   <div class="tile" data-section="formation" onclick="toggle('formation')">
     <div class="tile-num">03</div>
-    <div class="tile-title">Formation</div>
+    <div class="tile-title" data-fr="Formation" data-en="Education">Formation</div>
     <div class="tile-sub">Le Wagon - NEOMA - ICP</div>
     <div class="tile-arrow" id="arrow-formation">▼</div>
   </div>
   <div class="tile" data-section="competences" onclick="toggle('competences')">
     <div class="tile-num">04</div>
-    <div class="tile-title">Stack & Secteurs</div>
-    <div class="tile-sub">Tech & métier</div>
+    <div class="tile-title" data-fr="Stack & Secteurs" data-en="Stack & Fields">Stack & Secteurs</div>
+    <div class="tile-sub" data-fr="Tech & métier" data-en="Tech & business">Tech & métier</div>
     <div class="tile-arrow" id="arrow-competences">▼</div>
   </div>
   <div class="tile" data-section="ailleurs" onclick="toggle('ailleurs')">
     <div class="tile-num">05</div>
     <div class="tile-title">Side Quests</div>
-    <div class="tile-sub">Au-delà du CV</div>
+    <div class="tile-sub" data-fr="Au-delà du CV" data-en="Beyond the CV">Au-delà du CV</div>
     <div class="tile-arrow" id="arrow-ailleurs">▼</div>
   </div>
 </div>
 
 <!-- PANEL PROFIL -->
 <div class="panel" id="panel-profil">
-  <div class="panel-title">À propos</div>
+  <div class="panel-title" data-fr="À propos" data-en="About me">À propos</div>
   <div class="card">
-    <div class="card-prose">
+    <div class="card-prose" data-i18n="prose-profil">
       10 ans d'expérience métier dans l'assurance et le marketing, reconverti en data scientist.<br><br>
       Maîtrise complète de la chaîne data : Python, SQL, ML, NLP, LLMs via LangChain, GCP - avec des projets concrets :
       classification de texte avec BERT, pipelines de bout en bout, déploiement sur GCP.<br><br>
@@ -340,7 +350,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
 <!-- PANEL EXPÉRIENCES -->
 <div class="panel" id="panel-experiences">
-  <div class="panel-title">Expériences</div>
+  <div class="panel-title" data-fr="Expériences" data-en="Experience">Expériences</div>
   <div class="exp-grid">
 
     <div class="card">
@@ -348,7 +358,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
         <div class="card-title">Data Manager</div>
         <div class="card-right"><div class="card-dates">2020 - 2025</div><div class="card-employer">SPVIE Assurances - Suresnes</div></div>
       </div>
-      <ul class="card-bullets">
+      <ul class="card-bullets" data-i18n="bullets-dm">
         <li>Structuration et fiabilisation de la base de données groupe (RGPD, hiérarchisation, profils d'accès)</li>
         <li>Définition et déploiement des KPIs stratégiques ; intégration de nouvelles sources de données</li>
         <li>Ciblage de campagnes marketing par segmentation comportementale, géographique et démographique</li>
@@ -361,7 +371,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
         <div class="card-title">Data Analyst / CRM Manager</div>
         <div class="card-right"><div class="card-dates">2019 - 2020</div><div class="card-employer">SPVIE Assurances - Suresnes</div></div>
       </div>
-      <ul class="card-bullets">
+      <ul class="card-bullets" data-i18n="bullets-da">
         <li>Audit des process internes, reporting opérationnel, pilotage commercial</li>
         <li>Déploiement et paramétrage de Salesforce et Pardot</li>
       </ul>
@@ -369,10 +379,10 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
     <div class="card">
       <div class="card-top">
-        <div class="card-title">Chargé de comptes IARD</div>
+        <div class="card-title" data-fr="Chargé de comptes IARD" data-en="IARD Account Manager">Chargé de comptes IARD</div>
         <div class="card-right"><div class="card-dates">2017 - 2019</div><div class="card-employer">SPVIE Assurances - Puteaux</div></div>
       </div>
-      <ul class="card-bullets">
+      <ul class="card-bullets" data-i18n="bullets-iard">
         <li>Gestion d'un portefeuille d'une centaine de clients, du particulier aux grands comptes industriels</li>
         <li>Études de risques, montage et souscription de contrats, négociation avec les compagnies d'assurance</li>
         <li>Conseil et accompagnement clients sur des profils de risques complexes</li>
@@ -381,10 +391,10 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
     <div class="card">
       <div class="card-top">
-        <div class="card-title">Chargé de Communication</div>
+        <div class="card-title" data-fr="Chargé de Communication" data-en="Communications Manager">Chargé de Communication</div>
         <div class="card-right"><div class="card-dates">2015 - 2017</div><div class="card-employer">Stéphane Mahéas Couture - freelance</div></div>
       </div>
-      <ul class="card-bullets">
+      <ul class="card-bullets" data-i18n="bullets-com">
         <li>Stratégie éditoriale et gestion du calendrier de contenu</li>
         <li>Création du book presse, production de supports print et digitaux</li>
         <li>Retouche photo (Photoshop), rédaction web, traductions FR/EN</li>
@@ -394,12 +404,12 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
     <div class="card span2">
       <div class="card-top">
-        <div class="card-title">Expériences antérieures</div>
+        <div class="card-title" data-fr="Expériences antérieures" data-en="Earlier Experiences">Expériences antérieures</div>
         <div class="card-right"><div class="card-dates">2013 - 2015</div></div>
       </div>
-      <span class="note-line">Stagiaire Communication & Marketing - Publicis Groupe</span>
-      <span class="note-line">Assistant Marketing Digital - CIPRÉS Vie</span>
-      <span class="note-line">Coordinateur événementiel - NewCorp Conseil</span>
+      <span class="note-line" data-fr="Stagiaire Communication & Marketing - Publicis Groupe" data-en="Communications & Marketing Intern - Publicis Groupe">Stagiaire Communication & Marketing - Publicis Groupe</span>
+      <span class="note-line" data-fr="Assistant Marketing Digital - CIPRÉS Vie" data-en="Digital Marketing Assistant - CIPRÉS Vie">Assistant Marketing Digital - CIPRÉS Vie</span>
+      <span class="note-line" data-fr="Coordinateur événementiel - NewCorp Conseil" data-en="Events Coordinator - NewCorp Conseil">Coordinateur événementiel - NewCorp Conseil</span>
     </div>
 
   </div>
@@ -407,13 +417,13 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
 <!-- PANEL FORMATION -->
 <div class="panel" id="panel-formation">
-  <div class="panel-title">Formation</div>
+  <div class="panel-title" data-fr="Formation" data-en="Education">Formation</div>
   <div class="edu-grid">
 
     <div class="card">
       <div class="edu-school">Le Wagon</div>
-      <div class="edu-degree">Bootcamp Data Science, Machine Learning & AI</div>
-      <div class="edu-year">En ligne - 2026</div>
+      <div class="edu-degree" data-fr="Bootcamp Data Science, Machine Learning & AI" data-en="Data Science, Machine Learning & AI Bootcamp">Bootcamp Data Science, Machine Learning & AI</div>
+      <div class="edu-year" data-fr="En ligne - 2026" data-en="Online - 2026">En ligne - 2026</div>
       <div>
         <span class="pill">Python</span><span class="pill">SQL</span>
         <span class="pill">Machine Learning</span><span class="pill">NLP</span>
@@ -428,9 +438,9 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
-        <div class="wagon-pitch">
+        <div class="wagon-pitch" data-i18n="wagon-pitch">
           Développement d'un outil de détection de fake news de bout en bout, dans le cadre du bootcamp Data Science Le Wagon.<br><br>
-          Le projet repose sur un pipeline TF-IDF couplé à un modèle SVM calibré (CalibratedClassifierCV), atteignant 97% de précision sur un dataset de<br>
+          Le projet repose sur un pipeline TF-IDF couplé à un modèle SVM calibré (CalibratedClassifierCV), atteignant 97% de précision sur un dataset de
           40 000 articles. Le système intègre un fact-checker basé sur LangGraph et Gemini, combiné à Tavily pour la recherche de sources en temps réel.<br><br>
           Un agent IA décompose chaque article en claims distincts, les classe entre factuels et interprétatifs, puis les confronte à des sources vérifiées grâce à un prompt pointu. Un module de traduction automatique FR/EN via l'API Google Cloud Translation permet l'analyse d'articles en français.<br><br>
           L'ensemble est déployé via une API FastAPI sur Google Cloud Run, une interface Streamlit accessible en ligne et une extension Chrome Manifest v3, avec persistance des données en temps réel sur Google Sheets.<br>
@@ -441,15 +451,15 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
     <div class="card">
       <div class="edu-school">NEOMA Business School</div>
-      <div class="edu-degree">Master Grande École, Communication Digitale</div>
+      <div class="edu-degree" data-fr="Master Grande École, Communication Digitale" data-en="Master's Degree, Digital Communication (Grande Ecole)">Master Grande École, Communication Digitale</div>
       <div class="edu-year">Reims - 2012 - 2014</div>
     </div>
 
     <div class="card">
       <div class="edu-school">ICP - Institut Catholique de Paris</div>
-      <div class="edu-degree">Licence Sciences Sociales, Économiques et Politiques</div>
+      <div class="edu-degree" data-fr="Licence Sciences Sociales, Économiques et Politiques" data-en="Bachelor's Degree, Social, Economic and Political Sciences">Licence Sciences Sociales, Économiques et Politiques</div>
       <div class="edu-year">Paris - 2008 - 2012</div>
-      <div class="edu-detail">Président du Pôle Communication du Bureau des Élèves - Ambassadeur ICP</div>
+      <div class="edu-detail" data-fr="Président du Pôle Communication du Bureau des Élèves - Ambassadeur ICP" data-en="Head of Communications, Student Association - ICP Ambassador">Président du Pôle Communication du Bureau des Élèves - Ambassadeur ICP</div>
     </div>
 
   </div>
@@ -457,23 +467,56 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
 <!-- PANEL STACK & SECTEURS -->
 <div class="panel" id="panel-competences">
-  <div class="panel-title">Stack & Secteurs</div>
+  <div class="panel-title" data-fr="Stack & Secteurs" data-en="Stack & Fields">Stack & Secteurs</div>
   <div class="skills-grid">
 
     <div class="skill-card">
       <div class="skill-card-title">Data & Tech</div>
       <div class="skill-chips">
-        <span class="chip ctip" data-tip="Langage principal : data wrangling, ML, scripting">Python</span>
-        <span class="chip ctip" data-tip="Requêtes avancées, window functions, CTEs - PostgreSQL & BigQuery">SQL</span>
-        <span class="chip ctip" data-tip="Algorithmes classiques de ML supervisé et non-supervisé">Scikit-learn</span>
-        <span class="chip ctip" data-tip="Deep learning et réseaux de neurones">TensorFlow</span>
-        <span class="chip ctip" data-tip="Modèles de langage pré-entraînés : BERT, Whisper, VQA">HuggingFace</span>
-        <span class="chip ctip" data-tip="Orchestration de pipelines et d'agents LLM">LangChain</span>
-        <span class="chip ctip" data-tip="Déploiement cloud : Cloud Run, BigQuery, Vertex AI">GCP</span>
-        <span class="chip ctip" data-tip="Dashboards et rapports interactifs pour le pilotage commercial">Power BI</span>
-        <span class="chip ctip" data-tip="Bases de données relationnelles, procédures stockées">SQL Server</span>
-        <span class="chip ctip" data-tip="Modélisation avancée, tableaux croisés, certifié LinkedIn">Excel ✓</span>
-        <span class="chip ctip" data-tip="Automatisation de tâches et macros Office">VBA</span>
+        <span class="chip ctip"
+          data-tip="Langage principal : data wrangling, ML, scripting"
+          data-tip-fr="Langage principal : data wrangling, ML, scripting"
+          data-tip-en="Main language: data wrangling, ML, scripting">Python</span>
+        <span class="chip ctip"
+          data-tip="Requêtes avancées, window functions, CTEs - PostgreSQL & BigQuery"
+          data-tip-fr="Requêtes avancées, window functions, CTEs - PostgreSQL & BigQuery"
+          data-tip-en="Advanced queries, window functions, CTEs - PostgreSQL & BigQuery">SQL</span>
+        <span class="chip ctip"
+          data-tip="Algorithmes classiques de ML supervisé et non-supervisé"
+          data-tip-fr="Algorithmes classiques de ML supervisé et non-supervisé"
+          data-tip-en="Classic supervised and unsupervised ML algorithms">Scikit-learn</span>
+        <span class="chip ctip"
+          data-tip="Deep learning et réseaux de neurones"
+          data-tip-fr="Deep learning et réseaux de neurones"
+          data-tip-en="Deep learning and neural networks">TensorFlow</span>
+        <span class="chip ctip"
+          data-tip="Modèles de langage pré-entraînés : BERT, Whisper, VQA"
+          data-tip-fr="Modèles de langage pré-entraînés : BERT, Whisper, VQA"
+          data-tip-en="Pre-trained language models: BERT, Whisper, VQA">HuggingFace</span>
+        <span class="chip ctip"
+          data-tip="Orchestration de pipelines et d'agents LLM"
+          data-tip-fr="Orchestration de pipelines et d'agents LLM"
+          data-tip-en="LLM pipeline and agent orchestration">LangChain</span>
+        <span class="chip ctip"
+          data-tip="Déploiement cloud : Cloud Run, BigQuery, Vertex AI"
+          data-tip-fr="Déploiement cloud : Cloud Run, BigQuery, Vertex AI"
+          data-tip-en="Cloud deployment: Cloud Run, BigQuery, Vertex AI">GCP</span>
+        <span class="chip ctip"
+          data-tip="Dashboards et rapports interactifs pour le pilotage commercial"
+          data-tip-fr="Dashboards et rapports interactifs pour le pilotage commercial"
+          data-tip-en="Interactive dashboards and reports for sales performance tracking">Power BI</span>
+        <span class="chip ctip"
+          data-tip="Bases de données relationnelles, procédures stockées"
+          data-tip-fr="Bases de données relationnelles, procédures stockées"
+          data-tip-en="Relational databases, stored procedures">SQL Server</span>
+        <span class="chip ctip"
+          data-tip="Modélisation avancée, tableaux croisés, certifié LinkedIn"
+          data-tip-fr="Modélisation avancée, tableaux croisés, certifié LinkedIn"
+          data-tip-en="Advanced modelling, pivot tables">Excel ✓</span>
+        <span class="chip ctip"
+          data-tip="Automatisation de tâches et macros Office"
+          data-tip-fr="Automatisation de tâches et macros Office"
+          data-tip-en="Task automation and Office macros">VBA</span>
       </div>
     </div>
 
@@ -481,40 +524,75 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
       <div class="skill-card-title">CRM & Marketing</div>
       <div class="skill-chips">
         <span class="chip">Salesforce</span><span class="chip">Pardot</span>
-        <span class="chip">Segmentation</span><span class="chip">Ciblage</span>
+        <span class="chip">Segmentation</span>
+        <span class="chip" data-fr="Ciblage" data-en="Targeting">Ciblage</span>
         <span class="chip">Microsoft Office</span>
       </div>
     </div>
 
     <div class="skill-card">
-      <div class="skill-card-title">Secteurs</div>
+      <div class="skill-card-title" data-fr="Secteurs" data-en="Fields">Secteurs</div>
       <div class="skill-chips">
-        <span class="chip">Assurance IARD</span><span class="chip">Assurance vie</span>
-        <span class="chip">Courtage</span><span class="chip">Marketing direct</span>
-        <span class="chip">Data gouvernance</span><span class="chip">RGPD</span>
+        <span class="chip" data-fr="Assurance IARD" data-en="IARD Insurance">Assurance IARD</span>
+        <span class="chip" data-fr="Assurance vie" data-en="Life Insurance">Assurance vie</span>
+        <span class="chip" data-fr="Courtage" data-en="Brokerage">Courtage</span>
+        <span class="chip" data-fr="Marketing direct" data-en="Direct Marketing">Marketing direct</span>
+        <span class="chip" data-fr="Data gouvernance" data-en="Data Governance">Data gouvernance</span>
+        <span class="chip" data-fr="RGPD" data-en="GDPR">RGPD</span>
       </div>
     </div>
 
     <div class="skill-card">
-      <div class="skill-card-title">Savoir-faire</div>
+      <div class="skill-card-title" data-fr="Savoir-faire" data-en="Professional Skills">Savoir-faire</div>
       <div class="skill-chips">
-        <span class="chip">Pilotage de projets</span>
-        <span class="chip ctip" data-tip="Gestion et animation d'équipes chez SPVIE Assurances sur plusieurs années - coordination transverse entre métier, SI et commercial.">Management</span>
-        <span class="chip ctip" data-tip="Capacité à vulgariser des sujets techniques complexes, à structurer une pensée et à la rendre accessible - que ce soit dans un rapport, une présentation ou une conversation.">Pédagogie</span>
-        <span class="chip ctip" data-tip="Transformer des données brutes en insights actionnables, des idées éparses en structures cohérentes - c'est le même geste, peu importe le contexte.">Esprit de synthèse</span>
-        <span class="chip">Esprit d'initiative</span>
-        <span class="chip">Sens du client</span>
+        <span class="chip" data-fr="Pilotage de projets" data-en="Project Management">Pilotage de projets</span>
+        <span class="chip ctip"
+          data-tip="Gestion et animation d'équipes chez SPVIE Assurances sur plusieurs années - coordination transverse entre métier, SI et commercial."
+          data-tip-fr="Gestion et animation d'équipes chez SPVIE Assurances sur plusieurs années - coordination transverse entre métier, SI et commercial."
+          data-tip-en="Team management and cross-functional coordination at SPVIE Assurances over several years - bridging business, IT and sales teams.">Management</span>
+        <span class="chip ctip"
+          data-fr="Pédagogie" data-en="Teaching skills"
+          data-tip="Capacité à vulgariser des sujets techniques complexes, à structurer une pensée et à la rendre accessible - que ce soit dans un rapport, une présentation ou une conversation."
+          data-tip-fr="Capacité à vulgariser des sujets techniques complexes, à structurer une pensée et à la rendre accessible - que ce soit dans un rapport, une présentation ou une conversation."
+          data-tip-en="Breaking down complex technical topics and making them accessible - whether in a report, a presentation or a conversation.">Pédagogie</span>
+        <span class="chip ctip"
+          data-fr="Esprit de synthèse" data-en="Analytical mindset"
+          data-tip="Transformer des données brutes en insights actionnables, des idées éparses en structures cohérentes - c'est le même geste, peu importe le contexte."
+          data-tip-fr="Transformer des données brutes en insights actionnables, des idées éparses en structures cohérentes - c'est le même geste, peu importe le contexte."
+          data-tip-en="Turning raw data into actionable insights, and scattered ideas into coherent structures - the same gesture, regardless of context.">Esprit de synthèse</span>
+        <span class="chip" data-fr="Esprit d'initiative" data-en="Initiative">Esprit d'initiative</span>
+        <span class="chip" data-fr="Sens du client" data-en="Client focus">Sens du client</span>
       </div>
     </div>
 
     <div class="skill-card">
-      <div class="skill-card-title">Savoir-être</div>
+      <div class="skill-card-title" data-fr="Savoir-être" data-en="Soft Skills">Savoir-être</div>
       <div class="skill-chips">
-        <span class="chip ctip" data-tip="De la communication à la data science en passant par l'assurance IARD et l'écriture - la curiosité n'est pas une posture, c'est un moteur.">Curiosité intellectuelle</span>
-        <span class="chip ctip" data-tip="Cinq ans à fiabiliser, structurer et sécuriser des bases de données critiques. La rigueur n'est pas une qualité, c'est une habitude.">Rigueur</span>
-        <span class="chip ctip" data-tip="Trois reconversions, trois secteurs, un fil rouge : comprendre vite, s'intégrer, et apporter quelque chose de nouveau.">Adaptabilité</span>
-        <span class="chip ctip" data-tip="Celui qui remarque ce que les autres ont manqué. Pas pour corriger, mais pour que le résultat soit vraiment propre.">Sens du détail</span>
-        <span class="chip ctip" data-tip="&quot;On a toujours fait comme ça&quot; n'est pas une raison. C'est souvent le point de départ d'un problème non résolu.">Challenger le statu quo</span>
+        <span class="chip ctip"
+          data-fr="Curiosité intellectuelle" data-en="Intellectual curiosity"
+          data-tip="De la communication à la data science en passant par l'assurance IARD et l'écriture - la curiosité n'est pas une posture, c'est un moteur."
+          data-tip-fr="De la communication à la data science en passant par l'assurance IARD et l'écriture - la curiosité n'est pas une posture, c'est un moteur."
+          data-tip-en="From communications to data science, via IARD insurance and writing - curiosity is not a pose, it's a driver.">Curiosité intellectuelle</span>
+        <span class="chip ctip"
+          data-fr="Rigueur" data-en="Rigour"
+          data-tip="Cinq ans à fiabiliser, structurer et sécuriser des bases de données critiques. La rigueur n'est pas une qualité, c'est une habitude."
+          data-tip-fr="Cinq ans à fiabiliser, structurer et sécuriser des bases de données critiques. La rigueur n'est pas une qualité, c'est une habitude."
+          data-tip-en="Five years structuring, securing and maintaining critical databases. Rigour is not a quality, it's a habit.">Rigueur</span>
+        <span class="chip ctip"
+          data-fr="Adaptabilité" data-en="Adaptability"
+          data-tip="Trois reconversions, trois secteurs, un fil rouge : comprendre vite, s'intégrer, et apporter quelque chose de nouveau."
+          data-tip-fr="Trois reconversions, trois secteurs, un fil rouge : comprendre vite, s'intégrer, et apporter quelque chose de nouveau."
+          data-tip-en="Three career changes, three industries, one common thread: learn fast, fit in, and bring something new.">Adaptabilité</span>
+        <span class="chip ctip"
+          data-fr="Sens du détail" data-en="Attention to detail"
+          data-tip="Celui qui remarque ce que les autres ont manqué. Pas pour corriger, mais pour que le résultat soit vraiment propre."
+          data-tip-fr="Celui qui remarque ce que les autres ont manqué. Pas pour corriger, mais pour que le résultat soit vraiment propre."
+          data-tip-en="The person who notices what others missed. Not to correct them, but to make the final result genuinely clean.">Sens du détail</span>
+        <span class="chip ctip"
+          data-fr="Challenger le statu quo" data-en="Challenge the status quo"
+          data-tip="&quot;On a toujours fait comme ça&quot; n'est pas une raison. C'est souvent le point de départ d'un problème non résolu."
+          data-tip-fr="&quot;On a toujours fait comme ça&quot; n'est pas une raison. C'est souvent le point de départ d'un problème non résolu."
+          data-tip-en="&quot;We've always done it this way&quot; is not a reason. It's often where an unresolved problem starts.">Challenger le statu quo</span>
       </div>
     </div>
 
@@ -528,11 +606,11 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
     <div class="card">
       <div class="card-top">
-        <div class="card-title">Écriture</div>
+        <div class="card-title" data-fr="Écriture" data-en="Writing">Écriture</div>
       </div>
-      <div class="card-prose">
+      <div class="card-prose" data-i18n="prose-writing">
         Je travaille depuis quelques temps sur l'écriture de mon premier roman : <em>Celui qui avait les clés</em>.<br><br>
-        L'histoire d'un réfugié, un homme de ménage sans papiers au Vatican depuis quarante ans, élu pape par un concours de circonstances improbable. Il prend le nom de Jean-Paul III et décide de nettoyer l'Église de l'intérieur.<br><br>
+        L'histoire d'un réfugié, un homme de ménage sans papiers au Vatican depuis quarante ans, élu pape par un concours de circonstances improbable. Il décide de nettoyer l'Église de l'intérieur, tout en faisant face à quelques détracteurs.<br><br>
         L'écriture est aussi pour moi un espace plus intime, loin des projets et des ambitions. Des chansons pour ma fille, parce que certaines choses se disent mieux en musique qu'en mots ordinaires, et que des chansons permettent parfois de s'endormir plus sereinement. Des poèmes écrits à la main, souvent dans des moments difficiles, qui ne sont pas faits pour être lus mais pour ne pas rester enfermés. Des textes courts, des fragments, des débuts de quelque chose qui n'aboutissent pas toujours, et c'est très bien comme ça.<br><br>
         Écrire, pour moi, c'est aussi une façon de mettre de l'ordre dans ce qui ne s'explique pas.
       </div>
@@ -540,9 +618,9 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
     <div class="card">
       <div class="card-top">
-        <div class="card-title">Loisirs</div>
+        <div class="card-title" data-fr="Loisirs" data-en="Hobbies">Loisirs</div>
       </div>
-      <ul class="card-bullets">
+      <ul class="card-bullets" data-i18n="bullets-hobbies">
         <li><strong>Lego</strong> : Pas les boites pour enfants. Les grandes, les complexes, celles qui prennent trois soirées et une bonne dose de patience. Assembler des centaines de pièces disparates pour faire émerger quelque chose de cohérent et de fonctionnel. Finalement pas si éloigné de ce que je fais avec la donnée.</li>
         <li><strong>Jeux vidéo</strong> : Un rapport au jeu qui dure depuis l'enfance et qui n'a aucune raison de s'arrêter. Des mondes à explorer, des mécaniques à comprendre, des problèmes à résoudre avec des ressources limitées. Un excellent entrainement pour penser en systèmes, anticiper les conséquences et ne pas lâcher avant d'avoir trouvé.</li>
         <li><strong>Booknooks</strong> : Des dioramas miniatures qui s'insèrent dans une bibliothèque et ouvrent une fenêtre sur un monde imaginaire. Un hobby de niche, quelque part entre l'artisanat, l'architecture et la poésie. La preuve qu'avec de la précision et un peu de vision, on peut créer quelque chose de grand dans un tout petit espace.</li>
@@ -555,7 +633,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   </div>
 </div>
 
-<!-- CHAT FAB -->
+<!-- CHAT FAB (archivé - non actif)
 <button class="fab" onclick="toggleChat()" id="fab-btn">💬 Discuter avec mon CV</button>
 
 <div class="chat-popup" id="chat-popup">
@@ -571,6 +649,7 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
     <button class="chat-send" onclick="sendMsg()">→</button>
   </div>
 </div>
+-->
 
 <script>
 // ── LOADER ──
@@ -592,7 +671,6 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 // ── ACCORDION ──
 let current = null;
 
-// Mémorise le noeud précédant chaque panel pour restauration
 const panelPrev = {};
 ['profil', 'experiences', 'formation', 'competences', 'ailleurs'].forEach(id => {
   panelPrev[id] = document.getElementById('panel-' + id).previousElementSibling;
@@ -658,32 +736,35 @@ let videoOpen = false;
 function toggleVideo() {
   videoOpen = !videoOpen;
   document.getElementById('wagon-video-wrap').style.display = videoOpen ? 'grid' : 'none';
-  document.getElementById('video-btn-text').textContent = videoOpen ? '▲ Masquer le projet' : '▶ Voir le projet de fin de formation';
+  const btnText = document.getElementById('video-btn-text');
+  if (currentLang === 'en') {
+    btnText.textContent = videoOpen ? '▲ Hide project' : '▶ Watch the graduation project';
+  } else {
+    btnText.textContent = videoOpen ? '▲ Masquer le projet' : '▶ Voir le projet de fin de formation';
+  }
 }
 
-// ── CHAT ──
+// ── CHAT (archivé) ──
 let chatOpen = false;
 const messages = [];
 
 function toggleChat() {
   chatOpen = !chatOpen;
-  document.getElementById('chat-popup').classList.toggle('open', chatOpen);
-  document.getElementById('fab-btn').textContent = chatOpen ? '✕ Fermer' : '💬 Discuter avec mon CV';
+  const popup = document.getElementById('chat-popup');
+  const fab = document.getElementById('fab-btn');
+  if (popup) popup.classList.toggle('open', chatOpen);
+  if (fab) fab.textContent = chatOpen ? '✕ Fermer' : '💬 Discuter avec mon CV';
 }
 
 async function sendMsg() {
   const input = document.getElementById('chat-input');
+  if (!input) return;
   const text = input.value.trim();
   if (!text) return;
   input.value = '';
-
-  // Affiche message user
   messages.push({ role: 'user', content: text });
   appendMsg(text, 'user');
-
-  // Typing indicator
   const typingEl = appendMsg('...', 'bot typing');
-
   try {
     const res = await fetch('/chat', {
       method: 'POST',
@@ -706,12 +787,74 @@ async function sendMsg() {
 
 function appendMsg(text, cls) {
   const msgs = document.getElementById('chat-msgs');
+  if (!msgs) return { remove: () => {} };
   const el = document.createElement('div');
   el.className = 'msg ' + cls;
   el.textContent = text;
   msgs.appendChild(el);
   msgs.scrollTop = msgs.scrollHeight;
   return el;
+}
+
+// ── LANG TOGGLE ──
+let currentLang = 'fr';
+
+const TRANSLATIONS = {
+  fr: {
+    'header-left': '📍 Orgeval - Yvelines (78)<br><a href="https://linkedin.com/in/cejego" target="_blank">🔗 linkedin.com/in/cejego</a><br><span style="padding-left:1.6em">Anglais bilingue</span>',
+    'prose-profil': `10 ans d'expérience métier dans l'assurance et le marketing, reconverti en data scientist.<br><br>Maîtrise complète de la chaîne data : Python, SQL, ML, NLP, LLMs via LangChain, GCP - avec des projets concrets : classification de texte avec BERT, pipelines de bout en bout, déploiement sur GCP.<br><br>Je cherche une équipe où ces compétences ont un impact direct sur le produit, le business et les équipes métier, et où la curiosité technique est une valeur, pas un bonus. Une équipe dans laquelle la collaboration et les échanges sont de mise, et où les idées sont valorisées plutôt que de se satisfaire du <em>"Bah, puisqu'on a tout le temps fait comme ça..."</em>`,
+    'bullets-dm': '<li>Structuration et fiabilisation de la base de données groupe (RGPD, hiérarchisation, profils d\'accès)</li><li>Définition et déploiement des KPIs stratégiques ; intégration de nouvelles sources de données</li><li>Ciblage de campagnes marketing par segmentation comportementale, géographique et démographique</li><li>Interlocuteur transverse entre les équipes métier, commerciales et SI</li>',
+    'bullets-da': '<li>Audit des process internes, reporting opérationnel, pilotage commercial</li><li>Déploiement et paramétrage de Salesforce et Pardot</li>',
+    'bullets-iard': '<li>Gestion d\'un portefeuille d\'une centaine de clients, du particulier aux grands comptes industriels</li><li>Études de risques, montage et souscription de contrats, négociation avec les compagnies d\'assurance</li><li>Conseil et accompagnement clients sur des profils de risques complexes</li>',
+    'bullets-com': '<li>Stratégie éditoriale et gestion du calendrier de contenu</li><li>Création du book presse, production de supports print et digitaux</li><li>Retouche photo (Photoshop), rédaction web, traductions FR/EN</li><li>Veille concurrentielle et positionnement de la marque</li>',
+    'wagon-pitch': `Développement d'un outil de détection de fake news de bout en bout, dans le cadre du bootcamp Data Science Le Wagon.<br><br>Le projet repose sur un pipeline TF-IDF couplé à un modèle SVM calibré (CalibratedClassifierCV), atteignant 97% de précision sur un dataset de 40 000 articles. Le système intègre un fact-checker basé sur LangGraph et Gemini, combiné à Tavily pour la recherche de sources en temps réel.<br><br>Un agent IA décompose chaque article en claims distincts, les classe entre factuels et interprétatifs, puis les confronte à des sources vérifiées grâce à un prompt pointu. Un module de traduction automatique FR/EN via l'API Google Cloud Translation permet l'analyse d'articles en français.<br><br>L'ensemble est déployé via une API FastAPI sur Google Cloud Run, une interface Streamlit accessible en ligne et une extension Chrome Manifest v3, avec persistance des données en temps réel sur Google Sheets.<br>Une interface admin protégée par mot de passe permet d'afficher les requêtes effectuées et de remonter certains KPIs utiles.`,
+    'prose-writing': `Je travaille depuis quelques temps sur l'écriture de mon premier roman : <em>Celui qui avait les clés</em>.<br><br>L'histoire d'un réfugié, un homme de ménage sans papiers au Vatican depuis quarante ans, élu pape par un concours de circonstances improbable. Il décide de nettoyer l'Église de l'intérieur, tout en faisant face à quelques détracteurs.<br><br>L'écriture est aussi pour moi un espace plus intime, loin des projets et des ambitions. Des chansons pour ma fille, parce que certaines choses se disent mieux en musique qu'en mots ordinaires, et que des chansons permettent parfois de s'endormir plus sereinement. Des poèmes écrits à la main, souvent dans des moments difficiles, qui ne sont pas faits pour être lus mais pour ne pas rester enfermés. Des textes courts, des fragments, des débuts de quelque chose qui n'aboutissent pas toujours, et c'est très bien comme ça.<br><br>Écrire, pour moi, c'est aussi une façon de mettre de l'ordre dans ce qui ne s'explique pas.`,
+    'bullets-hobbies': '<li><strong>Lego</strong> : Pas les boites pour enfants. Les grandes, les complexes, celles qui prennent trois soirées et une bonne dose de patience. Assembler des centaines de pièces disparates pour faire émerger quelque chose de cohérent et de fonctionnel. Finalement pas si éloigné de ce que je fais avec la donnée.</li><li><strong>Jeux vidéo</strong> : Un rapport au jeu qui dure depuis l\'enfance et qui n\'a aucune raison de s\'arrêter. Des mondes à explorer, des mécaniques à comprendre, des problèmes à résoudre avec des ressources limitées. Un excellent entrainement pour penser en systèmes, anticiper les conséquences et ne pas lâcher avant d\'avoir trouvé.</li><li><strong>Booknooks</strong> : Des dioramas miniatures qui s\'insèrent dans une bibliothèque et ouvrent une fenêtre sur un monde imaginaire. Un hobby de niche, quelque part entre l\'artisanat, l\'architecture et la poésie. La preuve qu\'avec de la précision et un peu de vision, on peut créer quelque chose de grand dans un tout petit espace.</li><li><strong>Lecture</strong> : Beaucoup de fiction, parfois de l\'histoire, souvent les deux en même temps. Une façon de nourrir la curiosité, de comprendre comment les choses fonctionnent autrement, et d\'emprunter des idées à des univers qui n\'ont l\'air de rien à voir avec le sien.</li><li><strong>Promenades avec mon chien</strong> : Le genre d\'activité qui ressemble à une contrainte et qui devient rapidement le meilleur moment de la journée. Sortir de l\'écran, lever la tête, voir les choses de loin. Souvent c\'est là que les meilleures idées arrivent, celles qu\'on ne trouve pas en cherchant.</li><li><strong>Ma fille</strong> : Pas vraiment un loisir. Plutôt la raison pour laquelle tout le reste a un sens.</li>'
+  },
+  en: {
+    'header-left': '📍 Orgeval - Yvelines (78) - France<br><a href="https://linkedin.com/in/cejego" target="_blank">🔗 linkedin.com/in/cejego</a><br><span style="padding-left:1.6em">Bilingual English - French</span>',
+    'prose-profil': `10 years of hands-on experience in insurance and marketing, now a data scientist.<br><br>Full command of the data stack: Python, SQL, ML, NLP, LLMs via LangChain, GCP - with concrete projects: text classification with BERT, end-to-end pipelines, deployment on GCP.<br><br>I'm looking for a team where these skills have a direct impact on the product, the business and the operational teams, and where technical curiosity is a value, not a bonus. A team built on collaboration and open exchange, where ideas are welcomed rather than dismissed with a <em>"Well, we've always done it this way..."</em>`,
+    'bullets-dm': '<li>Database structuring and reliability across the group (GDPR compliance, data hierarchy, access profiles)</li><li>Definition and deployment of strategic KPIs; integration of new data sources</li><li>Marketing campaign targeting through behavioural, geographic and demographic segmentation</li><li>Cross-functional liaison between business, sales and IT teams</li>',
+    'bullets-da': '<li>Internal process auditing, operational reportings, sales performance monitoring</li><li>Deployment and configuration of Salesforce and Pardot</li>',
+    'bullets-iard': '<li>Management of a 100 client portfolio, from individuals to large industrial accounts</li><li>Risk assessment, negotiation with insurance companies, contract structuring and underwriting</li><li>Client advisory and support on complex risk profiles</li>',
+    'bullets-com': '<li>Editorial strategy and content calendar management</li><li>Press kit creation, production of print and digital materials</li><li>Photo editing (Photoshop), web content writing, FR/EN translations</li><li>Competitive intelligence and brand positioning</li>',
+    'wagon-pitch': `Development of an end-to-end fake news detection tool, built as part of the Data Science bootcamp.<br><br>The project is built on a TF-IDF pipeline combined with a calibrated SVM model (CalibratedClassifierCV), reaching 97% accuracy on a dataset of 40,000 articles. The system integrates a fact-checker based on LangGraph and Gemini, combined with Tavily for real-time source retrieval.<br><br>An AI agent breaks each article down into distinct claims, classifies them as factual or subjective, then cross-references them against verified sources using a targeted prompt. An automatic FR/EN translation module via the Google Cloud Translation API enables the analysis of French-language articles.<br><br>The whole system is deployed via a FastAPI endpoint on Google Cloud Run, a Streamlit interface accessible online, and a Chrome Manifest v3 extension, with real-time data persistence on Google Sheets. A password-protected admin interface displays all queries and surfaces relevant KPIs.`,
+    'prose-writing': `I have been working for some time on my first novel: <em>Celui qui avait les clés</em> (The One Who Held the Keys).<br><br>The story of a refugee - an undocumented cleaner at the Vatican for forty years - who becomes pope through a highly unlikely chain of events. He then decides to clean up the Church from the inside while facing some detractors.<br><br>Writing is also a more intimate space for me, away from projects and ambitions. Songs for my daughter, because some things are better expressed through music than ordinary words, and because songs can sometimes make falling asleep a little easier. Handwritten poems, often written in difficult moments, not meant to be read but not meant to stay locked away either. Short texts, fragments, beginnings of something that don't always lead anywhere - and that's perfectly fine.<br><br>For me, writing is also a way of bringing order to what cannot be explained.`,
+    'bullets-hobbies': '<li><strong>Lego</strong>: Not the children\'s sets. The large ones, the complex ones - the kind that take several evenings and a healthy dose of patience. Assembling hundreds of scattered pieces into something coherent and functional. Not so different, in the end, from what I do with data.</li><li><strong>Video games</strong>: A relationship with games that goes back to childhood and has no reason to stop. Worlds to explore, mechanics to understand, problems to solve with limited resources. Excellent training for thinking in systems, anticipating consequences, and not giving up before finding the answer.</li><li><strong>Booknooks</strong>: Miniature dioramas that slot into a bookshelf and open a window onto an imaginary world. A niche hobby, somewhere between craftsmanship, architecture and poetry. Proof that with precision and a little vision, something grand can be created in a very small space.</li><li><strong>Reading</strong>: Mostly fiction, sometimes history, often both at once. A way to feed curiosity, understand how things work differently, and borrow ideas from worlds that seem to have nothing to do with your own.</li><li><strong>Walks with my dog</strong>: The kind of activity that feels like a chore and quickly becomes the best part of the day. Step away from the screen, look up, see things from a distance. That\'s where some of the best ideas come - the ones you find when you\'re not looking for them.</li><li><strong>My daughter</strong>: Not really a hobby. More like the reason everything else makes sense.</li>'
+  }
+};
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  // Simple text elements
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    el.textContent = lang === 'fr' ? el.dataset.fr : el.dataset.en;
+  });
+
+  // Tooltips
+  document.querySelectorAll('[data-tip-fr]').forEach(el => {
+    el.dataset.tip = lang === 'fr' ? el.dataset.tipFr : el.dataset.tipEn;
+  });
+
+  // HTML blocks
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const html = TRANSLATIONS[lang] && TRANSLATIONS[lang][key];
+    if (html) el.innerHTML = html;
+  });
+
+  // Video button
+  const btnText = document.getElementById('video-btn-text');
+  if (btnText) {
+    btnText.textContent = videoOpen
+      ? (lang === 'en' ? '▲ Hide project' : '▲ Masquer le projet')
+      : (lang === 'en' ? '▶ Watch the graduation project' : '▶ Voir le projet de fin de formation');
+  }
 }
 </script>
 
@@ -724,7 +867,7 @@ function appendMsg(text, cls) {
 </footer>
 
 <script>
-// Skill tooltips - follow cursor, appear bottom-left of mouse
+// Skill tooltips
 const skillTip = document.getElementById('skill-tooltip');
 
 document.querySelectorAll('.htip, .ctip').forEach(el => {
@@ -754,7 +897,6 @@ document.querySelectorAll('.htip, .ctip').forEach(el => {
 function posSkillTip(e) {
   const w = skillTip.offsetWidth || 220;
   const h = skillTip.offsetHeight || 50;
-  // Coin haut-droit du tooltip = position souris
   let x = e.clientX - w - 4;
   let y = e.clientY + 10;
   if (x < 4) x = e.clientX + 8;
