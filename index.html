@@ -47,8 +47,24 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   cursor: pointer;
   transition: all 0.2s;
   letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
 }
 .lang-btn.active { background: rgba(255,255,255,0.15); color: #F4F1EC; }
+#btn-fr::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'><rect width='1' height='2' fill='%23002395'/><rect x='1' width='1' height='2' fill='%23fff'/><rect x='2' width='1' height='2' fill='%23ED2939'/></svg>") center/cover no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+}
+#btn-en::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'><rect width='5' height='3' fill='%23fff'/><rect x='2' width='1' height='3' fill='%23C8102E'/><rect y='1' width='5' height='1' fill='%23C8102E'/></svg>") center/cover no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+}
 
 /* ── TILES ── */
 .tiles {
