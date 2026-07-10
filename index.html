@@ -989,7 +989,6 @@ function shuffleTiles() {
 var snorlaxTimer;
 function resetInactivity() {
   clearTimeout(snorlaxTimer);
-  document.getElementById('snorlax-wrap').classList.remove('napping');
   snorlaxTimer = setTimeout(function() {
     document.getElementById('snorlax-wrap').classList.add('napping');
   }, 120000);
