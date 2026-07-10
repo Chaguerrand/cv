@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Charles-Enguerrand Jégo</title>
+<title>Charles-Enguerrand Jégo - Data Scientist & ML Engineer</title>
+<meta name="description" content="CV interactif de Charles-Enguerrand Jégo - Data Scientist et ML Engineer, 10 ans d'expérience dans l'assurance et le marketing, reconverti en data science. Python, SQL, ML, NLP, LLMs, GCP.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Charles-Enguerrand Jégo - Data Scientist & ML Engineer">
+<meta property="og:description" content="10 ans d'expérience métier, reconverti en data scientist. Python, ML, NLP, LLMs, GCP - projets concrets déployés en production.">
+<meta property="og:url" content="https://cejego.onrender.com">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Charles-Enguerrand Jégo - Data Scientist & ML Engineer">
+<meta name="twitter:description" content="10 ans d'expérience métier, reconverti en data scientist. Python, ML, NLP, LLMs, GCP.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -105,7 +113,8 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 
 /* ── PANELS ── */
 .panel { max-width: 1600px; margin: 0 auto; padding: 44px 52px 72px; display: none; }
-.panel.visible { display: block; }
+.panel.visible { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .panel-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #1C3148; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid #E8895A; }
 
 /* PROFIL */
@@ -845,6 +854,7 @@ const TRANSLATIONS = {
 function setLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
+  localStorage.setItem('cv-lang', lang);
 
   document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
@@ -874,6 +884,12 @@ function setLang(lang) {
       : (lang === 'en' ? '▶ Watch the graduation project' : '▶ Voir le projet de fin de formation');
   }
 }
+
+// Restore saved language preference
+(function() {
+  const saved = localStorage.getItem('cv-lang');
+  if (saved === 'en') setLang('en');
+})();
 </script>
 
 <div id="skill-tooltip"></div>
