@@ -304,10 +304,10 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
   35%  { opacity: 1; }
   100% { opacity: 0; transform: translateY(-32px) rotate(14deg); }
 }
-.snorlax-drool { animation: drip 1.9s ease-in-out infinite; transform-origin: 52px 62px; }
+.snorlax-drool { animation: drip 1.9s ease-in-out infinite; }
 @keyframes drip {
-  0%, 100% { transform: scaleY(1); }
-  55%       { transform: scaleY(1.6); }
+  0%, 100% { transform: translateY(0); }
+  55%       { transform: translateY(5px); }
 }
 #snorlax-label { font-size: 10px; color: #7FA3BF; margin-top: 3px; font-style: italic; opacity: 0.7; }
 
@@ -1063,42 +1063,48 @@ function posSkillTip(e) {
   <span class="snorlax-z">z</span>
   <span class="snorlax-z">z</span>
   <span class="snorlax-z">z</span>
-  <svg viewBox="0 0 100 115" width="88" height="101" xmlns="http://www.w3.org/2000/svg">
-    <!-- Body -->
-    <ellipse cx="50" cy="88" rx="44" ry="30" fill="#7B8FAC"/>
-    <!-- Belly patch -->
-    <ellipse cx="50" cy="93" rx="26" ry="21" fill="#E8D5B0"/>
-    <!-- Head -->
-    <ellipse cx="50" cy="48" rx="27" ry="25" fill="#7B8FAC"/>
-    <!-- Left ear -->
-    <ellipse cx="25" cy="31" rx="7" ry="9" fill="#6A7E9A"/>
-    <ellipse cx="25" cy="31" rx="4" ry="6" fill="#C8A0A0" opacity="0.6"/>
-    <!-- Right ear -->
-    <ellipse cx="75" cy="31" rx="7" ry="9" fill="#6A7E9A"/>
-    <ellipse cx="75" cy="31" rx="4" ry="6" fill="#C8A0A0" opacity="0.6"/>
-    <!-- Closed eyes -->
-    <path d="M35,46 Q39,42 43,46" stroke="#2A3A4A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M57,46 Q61,42 65,46" stroke="#2A3A4A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <!-- Blush -->
-    <ellipse cx="35" cy="53" rx="6" ry="3.5" fill="#D4A0A0" opacity="0.45"/>
-    <ellipse cx="65" cy="53" rx="6" ry="3.5" fill="#D4A0A0" opacity="0.45"/>
-    <!-- Nose -->
-    <circle cx="46" cy="55" r="2" fill="#5A6A8A"/>
-    <circle cx="54" cy="55" r="2" fill="#5A6A8A"/>
-    <!-- Mouth -->
-    <path d="M44,61 Q50,66 56,61" stroke="#2A3A4A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    <!-- Drool -->
+  <svg viewBox="0 0 140 162" width="140" height="162" xmlns="http://www.w3.org/2000/svg">
+    <!-- Corps enorme -->
+    <ellipse cx="70" cy="112" rx="64" ry="54" fill="#7A8EAA"/>
+    <!-- Ventre creme -->
+    <ellipse cx="70" cy="120" rx="46" ry="42" fill="#EDD9A0"/>
+    <!-- Tete petite posee sur le corps -->
+    <circle cx="70" cy="58" r="34" fill="#7A8EAA"/>
+    <!-- Oreilles rondes -->
+    <circle cx="40" cy="36" r="11" fill="#697E9A"/>
+    <circle cx="40" cy="36" r="6"  fill="#C89090" opacity="0.65"/>
+    <circle cx="100" cy="36" r="11" fill="#697E9A"/>
+    <circle cx="100" cy="36" r="6"  fill="#C89090" opacity="0.65"/>
+    <!-- Yeux fermes - arches vers le bas (endormi) -->
+    <path d="M50,54 Q58,46 66,54" stroke="#2A3040" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M74,54 Q82,46 90,54" stroke="#2A3040" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <!-- Joues rouges -->
+    <ellipse cx="44" cy="66" rx="10" ry="6" fill="#E8A098" opacity="0.45"/>
+    <ellipse cx="96" cy="66" rx="10" ry="6" fill="#E8A098" opacity="0.45"/>
+    <!-- Narines -->
+    <circle cx="65" cy="65" r="2.5" fill="#4A5870"/>
+    <circle cx="75" cy="65" r="2.5" fill="#4A5870"/>
+    <!-- Bouche petite -->
+    <path d="M61,73 Q70,79 79,73" stroke="#2A3040" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Bave -->
     <g class="snorlax-drool">
-      <path d="M52,64 Q55,72 53,79" stroke="#B8D4E8" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <ellipse cx="52" cy="81" rx="4" ry="3" fill="#B8D4E8"/>
+      <path d="M73,76 Q77,88 75,98" stroke="#A8C8E0" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="74" cy="101" rx="6" ry="5" fill="#A8C8E0"/>
     </g>
-    <!-- Arms -->
-    <ellipse cx="11" cy="84" rx="12" ry="6" fill="#7B8FAC" transform="rotate(-18,11,84)"/>
-    <ellipse cx="89" cy="84" rx="12" ry="6" fill="#7B8FAC" transform="rotate(18,89,84)"/>
-    <!-- Feet -->
-    <ellipse cx="32" cy="115" rx="10" ry="5" fill="#6A7E9A"/>
-    <ellipse cx="50" cy="117" rx="10" ry="5" fill="#6A7E9A"/>
-    <ellipse cx="68" cy="115" rx="10" ry="5" fill="#6A7E9A"/>
+    <!-- Bras tout petits -->
+    <ellipse cx="10" cy="110" rx="17" ry="9" fill="#7A8EAA" transform="rotate(-22,10,110)"/>
+    <ellipse cx="130" cy="110" rx="17" ry="9" fill="#7A8EAA" transform="rotate(22,130,110)"/>
+    <!-- Pieds -->
+    <ellipse cx="44" cy="160" rx="20" ry="9" fill="#697E9A"/>
+    <ellipse cx="96" cy="160" rx="20" ry="9" fill="#697E9A"/>
+    <!-- Griffes gauche -->
+    <line x1="33" y1="154" x2="30" y2="162" stroke="#586A88" stroke-width="2" stroke-linecap="round"/>
+    <line x1="44" y1="151" x2="44" y2="162" stroke="#586A88" stroke-width="2" stroke-linecap="round"/>
+    <line x1="55" y1="154" x2="58" y2="162" stroke="#586A88" stroke-width="2" stroke-linecap="round"/>
+    <!-- Griffes droite -->
+    <line x1="85" y1="154" x2="82" y2="162" stroke="#586A88" stroke-width="2" stroke-linecap="round"/>
+    <line x1="96" y1="151" x2="96" y2="162" stroke="#586A88" stroke-width="2" stroke-linecap="round"/>
+    <line x1="107" y1="154" x2="110" y2="162" stroke="#586A88" stroke-width="2" stroke-linecap="round"/>
   </svg>
   <div id="snorlax-label" data-fr="cliquer pour reveiller" data-en="click to wake up">cliquer pour reveiller</div>
 </div>
