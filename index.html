@@ -998,10 +998,12 @@ function wakeUpSnorlax() {
   document.getElementById('snorlax-wrap').classList.remove('napping');
   resetInactivity();
 }
-['mousemove','keydown','click','touchstart','scroll'].forEach(function(ev) {
-  document.addEventListener(ev, resetInactivity, { passive: true });
+document.addEventListener('DOMContentLoaded', function() {
+  ['mousemove','keydown','click','touchstart','scroll'].forEach(function(ev) {
+    document.addEventListener(ev, resetInactivity, { passive: true });
+  });
+  resetInactivity();
 });
-resetInactivity();
 </script>
 
 <div id="skill-tooltip"></div>
