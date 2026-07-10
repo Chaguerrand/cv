@@ -271,15 +271,22 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2A3A
 /* === Easter egg: Snorlax === */
 #snorlax-wrap {
   position: fixed;
-  bottom: -200px;
-  right: 28px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
   z-index: 9998;
   cursor: pointer;
-  transition: bottom 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
   user-select: none;
   text-align: center;
 }
-#snorlax-wrap.napping { bottom: 12px; }
+#snorlax-wrap.napping {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
 .snorlax-z {
   position: absolute;
   color: #7FA3BF;
