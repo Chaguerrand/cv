@@ -1001,6 +1001,12 @@ document.addEventListener('DOMContentLoaded', function() {
   ['mousemove','keydown','click','touchstart','scroll'].forEach(function(ev) {
     document.addEventListener(ev, resetInactivity, { passive: true });
   });
+  document.addEventListener('click', function() {
+    if (document.getElementById('snorlax-wrap').classList.contains('napping')) wakeUpSnorlax();
+  });
+  document.addEventListener('touchstart', function() {
+    if (document.getElementById('snorlax-wrap').classList.contains('napping')) wakeUpSnorlax();
+  }, { passive: true });
   resetInactivity();
 });
 </script>
@@ -1058,11 +1064,11 @@ function posSkillTip(e) {
 </script>
 
 <!-- Easter egg: Snorlax apres 2 min d'inactivite -->
-<div id="snorlax-wrap" onclick="wakeUpSnorlax()" title="Cliquer pour reveiller">
+<div id="snorlax-wrap">
   <span class="snorlax-z">z</span>
   <span class="snorlax-z">z</span>
   <span class="snorlax-z">z</span>
-  <img src="/static/snorlax.png" width="240" height="240" alt="Snorlax" style="display:block; mix-blend-mode:multiply;">
+  <img src="/static/snorlax.png" alt="Snorlax" style="display:block; mix-blend-mode:multiply; width:min(240px,60vw); height:auto;">
   <div id="snorlax-label" data-fr="cliquer pour reveiller" data-en="click to wake up">cliquer pour reveiller</div>
 </div>
 
