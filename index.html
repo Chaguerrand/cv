@@ -268,48 +268,6 @@ html, body { font-family: 'Inter', sans-serif; background: #F2EFE9; color: #2a2a
   word-break: break-word;
 }
 
-/* === Easter egg: Snorlax === */
-#snorlax-wrap {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(0.6);
-  z-index: 9998;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
-  user-select: none;
-  text-align: center;
-}
-#snorlax-wrap.napping {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-}
-.snorlax-z {
-  position: absolute;
-  color: rgba(255,255,255,0.6);
-  font-weight: 700;
-  font-family: 'Playfair Display', serif;
-  opacity: 0;
-  animation: floatZ 2s ease-in-out infinite;
-  pointer-events: none;
-}
-.snorlax-z:nth-child(1) { font-size: 18px; right: 22px; top: 8px;  animation-delay: 0s; }
-.snorlax-z:nth-child(2) { font-size: 27px; right: 42px; top: -20px; animation-delay: 0.7s; }
-.snorlax-z:nth-child(3) { font-size: 36px; right: 64px; top: -56px; animation-delay: 1.4s; }
-@keyframes floatZ {
-  0%   { opacity: 0; transform: translateY(0) rotate(-10deg); }
-  35%  { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-32px) rotate(14deg); }
-}
-.snorlax-drool { animation: drip 1.9s ease-in-out infinite; }
-@keyframes drip {
-  0%, 100% { transform: translateY(0); }
-  55%       { transform: translateY(5px); }
-}
-#snorlax-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 3px; font-style: italic; opacity: 0.7; }
 
 </style>
 </head>
@@ -983,30 +941,6 @@ function shuffleTiles() {
   }, 1300);
 }
 
-// === Easter egg 4: Snorlax after 2 min inactivity ===
-var snorlaxTimer;
-function resetInactivity() {
-  clearTimeout(snorlaxTimer);
-  snorlaxTimer = setTimeout(function() {
-    document.getElementById('snorlax-wrap').classList.add('napping');
-  }, 120000);
-}
-function wakeUpSnorlax() {
-  document.getElementById('snorlax-wrap').classList.remove('napping');
-  resetInactivity();
-}
-document.addEventListener('DOMContentLoaded', function() {
-  ['mousemove','keydown','click','touchstart','scroll'].forEach(function(ev) {
-    document.addEventListener(ev, resetInactivity, { passive: true });
-  });
-  document.addEventListener('click', function() {
-    if (document.getElementById('snorlax-wrap').classList.contains('napping')) wakeUpSnorlax();
-  });
-  document.addEventListener('touchstart', function() {
-    if (document.getElementById('snorlax-wrap').classList.contains('napping')) wakeUpSnorlax();
-  }, { passive: true });
-  resetInactivity();
-});
 </script>
 
 <div id="skill-tooltip"></div>
@@ -1061,14 +995,6 @@ function posSkillTip(e) {
 }
 </script>
 
-<!-- Easter egg: Snorlax apres 2 min d'inactivite -->
-<div id="snorlax-wrap">
-  <span class="snorlax-z">z</span>
-  <span class="snorlax-z">z</span>
-  <span class="snorlax-z">z</span>
-  <img src="/static/snorlax.png" alt="Snorlax" style="display:block; mix-blend-mode:multiply; width:min(240px,60vw); height:auto;">
-  <div id="snorlax-label" data-fr="cliquer pour reveiller" data-en="click to wake up">cliquer pour reveiller</div>
-</div>
 
 </body>
 </html>
