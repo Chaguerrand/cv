@@ -12,7 +12,7 @@ CHARLES-ENGUERRAND JÉGO - Data Scientist - ML Engineer
 Orgeval, Yvelines (78) | Anglais bilingue | linkedin.com/in/cejego
 
 PROFIL
-10 ans d'expérience métier dans l'assurance et le marketing, reconverti en data scientist.
+10 ans d'expérience métier dans l'assurance et le marketing, avec les mains dans la donnée depuis le début.
 Maîtrise complète de la chaîne data (Python, SQL, ML, NLP, LLMs via LangChain, GCP).
 Projets concrets : classification de texte avec BERT, pipelines de bout en bout, déploiement sur GCP.
 
