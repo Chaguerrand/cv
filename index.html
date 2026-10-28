@@ -1,4 +1,8 @@
 <title>Charles-Enguerrand Jego</title>
+<!-- ============================================================
+     Tiens, un curieux.
+     C'est vachement plus lisible de l'autre côté, non ?
+     ============================================================ -->
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -842,7 +846,8 @@ a.contact-value:hover { color: var(--accent); text-decoration: underline; }
       </div>
     </section>
 
-    <!-- STACK & SECTEURS -->
+    <!-- Stack validée. Maintenant tu peux fermer l'inspecteur. -->
+<!-- STACK & SECTEURS -->
     <section class="section" id="competences" data-section="5">
       <div class="section-body">
         <div class="section-header">
@@ -1432,4 +1437,26 @@ a.contact-value:hover { color: var(--accent); text-decoration: underline; }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
+
+// Tu es encore là ? Respect.
+// Envoie un mail, on a des choses à se dire : charles.jego@gmail.com
 </script>
+<script>
+(function() {
+  // Console easter egg
+  var s1 = 'color:#E8895A;font-size:1.2rem;font-weight:700;font-family:monospace';
+  var s2 = 'color:#7a7a72;font-size:0.85rem;font-family:monospace';
+  console.log('%c  ██████╗███████╗     ██╗\n ██╔════╝██╔════╝     ██║\n ██║     █████╗    ████████╗\n ██║     ██╔══╝   ██╔═██╔══╝\n ╚██████╗███████╗ ██║  ██║\n  ╚═════╝╚══════╝ ╚═╝  ╚═╝', s1);
+  console.log('%c Développeur dans l\'âme ?\n Parlons-en : charles.jego@gmail.com', s2);
+
+  // Titre onglet quand la page est inactive
+  var _title = document.title;
+  document.addEventListener('visibilitychange', function() {
+    document.title = document.hidden ? 'Reviens... 👀' : _title;
+  });
+})();
+</script>
+<!-- ============================================================
+     Toujours là. Impressionnant.
+     charles.jego@gmail.com
+     ============================================================ -->
